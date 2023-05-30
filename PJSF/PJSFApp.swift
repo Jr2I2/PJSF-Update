@@ -6,9 +6,17 @@
 //
 
 import SwiftUI
+import FirebaseCore
+import GoogleSignIn
+
 
 @main
 struct PJSFApp: App {
+    
+    init() {
+        FirebaseApp.configure()
+    }
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
