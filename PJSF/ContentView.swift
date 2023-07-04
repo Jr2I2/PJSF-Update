@@ -18,6 +18,7 @@ struct ContentView: View {
     
     
     var body: some View {
+        
         if userID == "" {
             AuthView()
         } else {
@@ -27,24 +28,13 @@ struct ContentView: View {
                 UserView()
             }
             else if domain == "sst.edu.sg" {
-                AdminView()
+                DefaultView()
             }
             else {
                 normalUserView()
             }
             
-            Button(action: {
-                let firebaseAuth = Auth.auth()
-                do {
-                  try firebaseAuth.signOut()
-                    withAnimation{
-                        userID = ""
-                    }
-                } catch let signOutError as NSError {
-                  print("Error signing out: %@", signOutError)
-                }}) {
-                Text("Sign Out")
-            }
+            
         }
     }
 }

@@ -14,6 +14,19 @@
 		7943A4BF2A260A9F00B6F66D /* AdminView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7943A4BE2A260A9F00B6F66D /* AdminView.swift */; };
 		7943A4C12A260AA900B6F66D /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7943A4C02A260AA900B6F66D /* UserView.swift */; };
 		7943A4C32A260AB400B6F66D /* normalUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7943A4C22A260AB400B6F66D /* normalUserView.swift */; };
+		7943A4C72A2725F100B6F66D /* DefaultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7943A4C62A2725F100B6F66D /* DefaultView.swift */; };
+		7943A4FD2A2B546A00B6F66D /* Attendance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7943A4FC2A2B546A00B6F66D /* Attendance.swift */; };
+		7943A5002A2B56CD00B6F66D /* Classes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7943A4FF2A2B56CD00B6F66D /* Classes.swift */; };
+		7943A5022A2B5F3200B6F66D /* AddClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7943A5012A2B5F3100B6F66D /* AddClass.swift */; };
+		7943A5042A2B639100B6F66D /* ClassDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7943A5032A2B639100B6F66D /* ClassDetail.swift */; };
+		7943A5062A2B971600B6F66D /* Yes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7943A5052A2B971600B6F66D /* Yes.swift */; };
+		7943A5082A2BAAFE00B6F66D /* Students.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7943A5072A2BAAFE00B6F66D /* Students.swift */; };
+		7943A50A2A2BB9D700B6F66D /* AddStudent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7943A5092A2BB9D700B6F66D /* AddStudent.swift */; };
+		7986184B2A2F2B3B00BEFB43 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 7986184A2A2F2B3B00BEFB43 /* FirebaseAnalytics */; };
+		7986184D2A2F2B4200BEFB43 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 7986184C2A2F2B4200BEFB43 /* FirebaseMessaging */; };
+		7986184F2A2F367D00BEFB43 /* HazardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7986184E2A2F367D00BEFB43 /* HazardsView.swift */; };
+		798618512A2F370400BEFB43 /* Hazards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798618502A2F370400BEFB43 /* Hazards.swift */; };
+		79BDE4582A37080F004F5D7C /* inboxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BDE4572A37080F004F5D7C /* inboxView.swift */; };
 		79FCAE9D2A25F5C800245688 /* PJSFApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FCAE9C2A25F5C800245688 /* PJSFApp.swift */; };
 		79FCAE9F2A25F5C800245688 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FCAE9E2A25F5C800245688 /* ContentView.swift */; };
 		79FCAEA12A25F5D000245688 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79FCAEA02A25F5D000245688 /* Assets.xcassets */; };
@@ -37,6 +50,17 @@
 		7943A4C02A260AA900B6F66D /* UserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
 		7943A4C22A260AB400B6F66D /* normalUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = normalUserView.swift; sourceTree = "<group>"; };
 		7943A4C42A260D6200B6F66D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		7943A4C62A2725F100B6F66D /* DefaultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultView.swift; sourceTree = "<group>"; };
+		7943A4FC2A2B546A00B6F66D /* Attendance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attendance.swift; sourceTree = "<group>"; };
+		7943A4FF2A2B56CD00B6F66D /* Classes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Classes.swift; sourceTree = "<group>"; };
+		7943A5012A2B5F3100B6F66D /* AddClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddClass.swift; sourceTree = "<group>"; };
+		7943A5032A2B639100B6F66D /* ClassDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassDetail.swift; sourceTree = "<group>"; };
+		7943A5052A2B971600B6F66D /* Yes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Yes.swift; sourceTree = "<group>"; };
+		7943A5072A2BAAFE00B6F66D /* Students.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Students.swift; sourceTree = "<group>"; };
+		7943A5092A2BB9D700B6F66D /* AddStudent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStudent.swift; sourceTree = "<group>"; };
+		7986184E2A2F367D00BEFB43 /* HazardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HazardsView.swift; sourceTree = "<group>"; };
+		798618502A2F370400BEFB43 /* Hazards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hazards.swift; sourceTree = "<group>"; };
+		79BDE4572A37080F004F5D7C /* inboxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = inboxView.swift; sourceTree = "<group>"; };
 		79FCAE992A25F5C800245688 /* PJSF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PJSF.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79FCAE9C2A25F5C800245688 /* PJSFApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PJSFApp.swift; sourceTree = "<group>"; };
 		79FCAE9E2A25F5C800245688 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -51,6 +75,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7986184D2A2F2B4200BEFB43 /* FirebaseMessaging in Frameworks */,
+				7986184B2A2F2B3B00BEFB43 /* FirebaseAnalytics in Frameworks */,
 				79FCAEB12A25F79D00245688 /* FirebaseDatabase in Frameworks */,
 				79FCAEB52A25F79D00245688 /* FirebaseStorage in Frameworks */,
 				79FCAEBE2A26048300245688 /* GoogleSignInSwift in Frameworks */,
@@ -78,7 +104,11 @@
 			children = (
 				7943A4BE2A260A9F00B6F66D /* AdminView.swift */,
 				7943A4C02A260AA900B6F66D /* UserView.swift */,
+				7943A4C62A2725F100B6F66D /* DefaultView.swift */,
 				7943A4C22A260AB400B6F66D /* normalUserView.swift */,
+				79BDE4572A37080F004F5D7C /* inboxView.swift */,
+				7986184E2A2F367D00BEFB43 /* HazardsView.swift */,
+				798618502A2F370400BEFB43 /* Hazards.swift */,
 			);
 			path = "Actual App Views";
 			sourceTree = "<group>";
@@ -91,15 +121,38 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		7943A4F12A28844500B6F66D /* Attendance */ = {
+			isa = PBXGroup;
+			children = (
+				7943A4FC2A2B546A00B6F66D /* Attendance.swift */,
+				7943A5032A2B639100B6F66D /* ClassDetail.swift */,
+				7943A5092A2BB9D700B6F66D /* AddStudent.swift */,
+				7943A5012A2B5F3100B6F66D /* AddClass.swift */,
+				7943A4FF2A2B56CD00B6F66D /* Classes.swift */,
+				7943A5072A2BAAFE00B6F66D /* Students.swift */,
+				7943A5052A2B971600B6F66D /* Yes.swift */,
+			);
+			path = Attendance;
+			sourceTree = "<group>";
+		};
+		798618492A2F2B3B00BEFB43 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		79FCAE902A25F5C800245688 = {
 			isa = PBXGroup;
 			children = (
 				79FCAEB62A25FB8E00245688 /* GoogleService-Info.plist */,
 				7943A4B32A26091300B6F66D /* LoginOrSignupViews */,
+				7943A4F12A28844500B6F66D /* Attendance */,
 				7943A4B42A26092300B6F66D /* Actual App Views */,
 				79FCAE9B2A25F5C800245688 /* PJSF */,
 				7943A4BB2A260A1A00B6F66D /* Extensions */,
 				79FCAE9A2A25F5C800245688 /* Products */,
+				798618492A2F2B3B00BEFB43 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -114,11 +167,11 @@
 		79FCAE9B2A25F5C800245688 /* PJSF */ = {
 			isa = PBXGroup;
 			children = (
-				7943A4C42A260D6200B6F66D /* Info.plist */,
 				79FCAE9C2A25F5C800245688 /* PJSFApp.swift */,
 				79FCAE9E2A25F5C800245688 /* ContentView.swift */,
 				79FCAEBF2A2604DB00245688 /* ImagePicker.swift */,
 				79FCAEA02A25F5D000245688 /* Assets.xcassets */,
+				7943A4C42A260D6200B6F66D /* Info.plist */,
 				79FCAEA22A25F5D000245688 /* Preview Content */,
 			);
 			path = PJSF;
@@ -155,6 +208,8 @@
 				79FCAEB42A25F79D00245688 /* FirebaseStorage */,
 				79FCAEBB2A26048300245688 /* GoogleSignIn */,
 				79FCAEBD2A26048300245688 /* GoogleSignInSwift */,
+				7986184A2A2F2B3B00BEFB43 /* FirebaseAnalytics */,
+				7986184C2A2F2B4200BEFB43 /* FirebaseMessaging */,
 			);
 			productName = PJSF;
 			productReference = 79FCAE992A25F5C800245688 /* PJSF.app */;
@@ -215,15 +270,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7986184F2A2F367D00BEFB43 /* HazardsView.swift in Sources */,
 				7943A4BA2A2609D600B6F66D /* LogInView.swift in Sources */,
 				79FCAEC02A2604DB00245688 /* ImagePicker.swift in Sources */,
 				7943A4B82A2609C300B6F66D /* SignUpView.swift in Sources */,
 				79FCAE9F2A25F5C800245688 /* ContentView.swift in Sources */,
 				7943A4BD2A260A2A00B6F66D /* String.swift in Sources */,
+				7943A50A2A2BB9D700B6F66D /* AddStudent.swift in Sources */,
+				7943A5062A2B971600B6F66D /* Yes.swift in Sources */,
 				7943A4B62A26096900B6F66D /* AuthView.swift in Sources */,
+				7943A4FD2A2B546A00B6F66D /* Attendance.swift in Sources */,
 				7943A4C32A260AB400B6F66D /* normalUserView.swift in Sources */,
+				79BDE4582A37080F004F5D7C /* inboxView.swift in Sources */,
 				7943A4BF2A260A9F00B6F66D /* AdminView.swift in Sources */,
+				7943A5002A2B56CD00B6F66D /* Classes.swift in Sources */,
+				798618512A2F370400BEFB43 /* Hazards.swift in Sources */,
+				7943A5082A2BAAFE00B6F66D /* Students.swift in Sources */,
+				7943A4C72A2725F100B6F66D /* DefaultView.swift in Sources */,
 				7943A4C12A260AA900B6F66D /* UserView.swift in Sources */,
+				7943A5022A2B5F3200B6F66D /* AddClass.swift in Sources */,
+				7943A5042A2B639100B6F66D /* ClassDetail.swift in Sources */,
 				79FCAE9D2A25F5C800245688 /* PJSFApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -448,6 +514,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		7986184A2A2F2B3B00BEFB43 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 79FCAEAD2A25F79D00245688 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		7986184C2A2F2B4200BEFB43 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 79FCAEAD2A25F79D00245688 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
 		79FCAEAE2A25F79D00245688 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 79FCAEAD2A25F79D00245688 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

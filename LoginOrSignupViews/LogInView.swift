@@ -154,7 +154,6 @@ struct LogInView: View {
                                 userEmail = authResult.user.email!
                             }
                         }
-                        
                     }
                 } label: {
                     Text("Sign In")
@@ -173,22 +172,20 @@ struct LogInView: View {
                     }
                 } label: {
                     Text("Sign In With Google")
-                        .frame(maxWidth: .infinity)
+                        .frame(maxWidth: 380)
                         .padding(.vertical, 8)
                         .background(alignment: .leading) {
                             Image("Google")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .frame(width: 30, alignment: .center)
+                                .frame(width: 30, alignment: .trailing)
                 }
                 
                         
                         }
-                }
-                
-                .buttonStyle(.bordered)
                 
                 
             }
         }
+    }
 }

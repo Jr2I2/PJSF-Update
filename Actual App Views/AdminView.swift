@@ -10,169 +10,286 @@ import FirebaseStorage
 import FirebaseFirestore
 
 struct AdminView: View {
+    @Environment(\.dismiss) var dismiss
+    
+    let uniqueuuid = "Emergency\(UUID().uuidString)"
+    let temp = UUID()
     
     @State var isPickerShowing = false
     @State var selectedImage: UIImage?
-    @State var retrievedImages = [UIImage]()
+    @State var retrievedImages = UIImage()
+    @State var retrievedTitle: String = ""
+    @State var titleText: String = ""
+    @State var descText: String = ""
+    @AppStorage("uid") var userID: String = ""
+    @AppStorage("email") var userEmail: String = ""
     
-    @State private var title :String = ""
+    @State var needCheck = "true"
+
     
+
+        
+    
+    var type = ["Hazard", "Emergency"]
+    var hazardType = ["Leak", "Cleanliness", "Potential Danger", "Other"]
+    @State private var selectedType = "Emergency"
+    @State private var selectedHazardType = "Potential Danger"
+        
     var body: some View {
-        VStack {
-            
+        Button {
+            isPickerShowing = true
+        } label: {
             if selectedImage != nil {
-                Image(uiImage: selectedImage!)
-                    .resizable()
-                    .frame(width: 200, height: 200)
-            }
-            
-            Button {
-                
-                isPickerShowing = true
-                
-            } label: {
-                Text("Select a Photo")
-            }
-            
-            if selectedImage != nil {
-                Button {
-                    uploadPhoto()
-                } label: {
-                    Text("Upload the Photo")
-                }
-            }
-            
-            Divider()
-            
-            HStack {
-                
-                //Loop through the images and display
-                ForEach(retrievedImages, id: \.self) { image in
-                    Image(uiImage: image)
+                ZStack{
+                    Image(uiImage: UIImage(named: "White")!)
                         .resizable()
-                        .frame(width: 200, height: 200)
+                        .frame(height:325)
+                    
+                    Image(uiImage: selectedImage!)
+                        .resizable()
+                        .frame(width:315, height:300)
                 }
-                
+            } else{
+                Image(uiImage: UIImage(named: "Placeholder")!)
+                    .resizable()
+                    .frame(height:325)
             }
+        }
+        Section {
+            VStack {
+                VStack(spacing: 8) {
+                    HStack {
+                        Text("What Happened?")
+                            .font(.headline)
+                            .frame(alignment: .leading)
+                        Spacer()
+                    }
+                    TextField("...", text: $titleText)
+                        .background(Color.clear)
+                }
+                .padding(.vertical, 4)
                 
-            
+                VStack(spacing: 8){
+                    HStack{
+                        Text("Short desc / Location:")
+                            .font(.headline)
+                        Spacer()
+                    }
+                    
+                    TextField("...", text: $descText)
+                        .background(Color.clear)
+                }
+                .padding(.vertical, 4)
+                Spacer()
+                Picker("What kind of issue is this?", selection: $selectedType) {
+                                ForEach(type, id: \.self) {
+                                    Text($0)
+                                }
+                            } .pickerStyle(SegmentedPickerStyle())
+                
+                if selectedType == "Hazard" {
+                    Picker("What kind of hazard is this?", selection: $selectedHazardType) {
+                                    ForEach(hazardType, id: \.self) {
+                                        Text($0)
+                                    }
+                                } .pickerStyle(DefaultPickerStyle())
+                            }
+                Spacer()
+                Button {
+                    isPickerShowing = false
+                    uploadPhoto()
+                    
+                } label: {
+                    Text("Submit")
+                        .foregroundColor(.white)
+                        .font(.title)
+                        .bold()
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(RoundedRectangle(cornerRadius: 10).fill(Color.blue))
+                        .padding(.horizontal)
+                }
+            }
+            .padding()
         }
+        .overlay(
+            Rectangle()
+                .frame(height: 1)
+                .foregroundColor(Color.gray)
+                .cornerRadius(0.5)
+                .offset(y: -1)
+                .mask(
+                    VStack {
+                        Rectangle()
+                            .foregroundColor(.clear)
+                        Rectangle()
+                            .frame(height: 1)
+                            .foregroundColor(Color.gray)
+                            .cornerRadius(0.5)
+                    }
+                )
+        )
+
+
+        
         .sheet(isPresented: $isPickerShowing, onDismiss: nil) {
-            
-            ImagePicker(selectedImage: $selectedImage, isPickerShowing: $isPickerShowing)
+                ImagePicker(selectedImage: $selectedImage, isPickerShowing: $isPickerShowing)
         }
-        .onAppear {
-            retrievePhotos()
-            
-        }
+        
+        
+
     }
     
     func uploadPhoto() {
+        let domain = userEmail.components(separatedBy: "@").last ?? ""
         
-        //Make sure that the selected image propoerty isn't nil
+        if domain == "sst.edu.sg" {
+            needCheck = "false"
+        }
+        
+        //Make sure that selected image property isnt nil
         guard selectedImage != nil else {
             return
         }
 
-        //Create Storage Reference
-        let storageRef = Storage.storage().reference()
-
-        //Turn our image into data
-        let imageData = selectedImage!.jpegData(compressionQuality: 0.0)
         
+        //Create storage reference
+        let storageRef = Storage.storage().reference()
+        
+        //Turn image into data
+        let imageData = selectedImage!.jpegData(compressionQuality: 0.8)
+        
+        //Check that we are able to conver it
         guard imageData != nil else {
             return
         }
-
-        //Specify the file path and name
+        
+        
+        //Specify file path and name
         let path = "images/\(UUID().uuidString).jpg"
         let fileRef = storageRef.child(path)
-
+        
         //Upload Data
         let uploadTask = fileRef.putData(imageData!, metadata: nil) { metadata, error in
             
-            //Check for errors
+            //check for error
             if error == nil && metadata != nil {
                 
-                //Save a reference of that file in firebase database
+                //Save a reference to the file in firebase database
                 let db = Firestore.firestore()
-                db.collection("images").document().setData(["url":path]) { error in
-                    
-                    //If there were no errors, display no image
-                    if error == nil {
-                        DispatchQueue.main.async {
-                            self.retrievedImages.append(self.selectedImage!)
-                        }
+                if selectedType == "Emergency" {
+                    db.collection("Emergencies").document(uniqueuuid).setData(["image":path, "title":titleText,"desc":descText, "Need Admin Check":needCheck]) { error in
                         
+                        // If there are no errors
+                        if error == nil {
+                            dismiss()
+                        }
                     }
-                    
                 }
-                    
-                
-
+                else {
+                    db.collection("Hazards").document("\(selectedHazardType)%\(temp)").setData(["image":path, "title":titleText,"desc":descText, "Need Admin Check":needCheck]) { error in
+                        
+                        // If there are no errors
+                        if error == nil {
+                                dismiss()
+                            }
+                        }
+                    }
+                }
             }
         }
+    
 
-        
-
-    }
     
     func retrievePhotos() {
         
         //Get the data from the database
         let db = Firestore.firestore()
-        db.collection("images").getDocuments { snapshot, error in
-            
-            if error == nil && snapshot != nil {
-                
-                var paths = [String]()
-                    
-                
-                for doc in snapshot!.documents {
-                    //Extract the file path
-                    paths.append(doc["url"] as! String)
-                    
-                }
-                
-            //Loop through each file path and fetch the data from st
-            for path in paths {
-                
-                //Get a reference to storage
+        let docRef = db.collection("Hazards").document("\(selectedHazardType)%\(temp)")
+        
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                let Components = dataDescription.components(separatedBy: "/")
+                let data = Components.last ?? ""
+                let component = data.components(separatedBy: "]")
+                let tempData = component.first ?? ""
+                let compmonentagain = tempData.components(separatedBy: ",")
+                let docData = compmonentagain.first ?? ""
+                print("Image data: \(docData)")
+                //Get a reference to the storage
                 let storageRef = Storage.storage().reference()
-                
+                            
                 //Specify the path
-                let fileRef = storageRef.child(path)
+                let fileRef = storageRef.child("images")
+                
+                //Get the image data
+                let imgRef = fileRef.child(docData)
+                print(imgRef)
                 
                 //Retrieve the data
-                fileRef.getData(maxSize: 5*1024*1024) { data, error in
-                    
+                imgRef.getData(maxSize: 5*1024*1024) { data, error in
+                    print("hi")
                     //Check for errors
-                    if error == nil && data != nil {
-                        
-                        //Create a UIImage and put it into our array for display
+                    if error == nil && data != nil{
+                                        
+                                        //Create a UIImage
                         if let image = UIImage(data: data!) {
                             DispatchQueue.main.async {
-                                retrievedImages.append(image)
+                                retrievedImages = image
                             }
                         }
-                       
-                        
-                        
                     }
-                    
                 }
-                
+            } else {
+                print("Document does not exist")
             }
-            
         }
     }
+    func retrieveTitle() {
         
+        //Get the data from the database
+        let db = Firestore.firestore()
+        let docTitleRef = db.collection("User\(userID)").document(uniqueuuid)
         
+        docTitleRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                let Components = dataDescription.components(separatedBy: "title")
+                let data = Components.last ?? ""
+                let component = data.components(separatedBy: ",")
+                let tempData = component.first ?? ""
+                let componentagain = tempData.components(separatedBy: ":")
+                let docData = componentagain.last ?? ""
+
+                print("Title data: \(docData)")
+            }
+        }
+    }
+    func retrieveDesc() {
         
-        //Display the images
+        //Get the data from the database
+        let db = Firestore.firestore()
+        let docDescRef = db.collection("User\(userID)").document(uniqueuuid)
         
+        docDescRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                let Components = dataDescription.components(separatedBy: "desc")
+                let data = Components.last ?? ""
+                let component = data.components(separatedBy: ",")
+                let tempData = component.first ?? ""
+                let componentagain = tempData.components(separatedBy: ":")
+                let docData = componentagain.last ?? ""
+
+                print("Desc data: \(docData)")
+            }
+        }
     }
 }
+        
+
+
 
 struct AdminView_Previews: PreviewProvider {
     static var previews: some View {

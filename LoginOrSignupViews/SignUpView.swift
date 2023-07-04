@@ -10,6 +10,7 @@ import FirebaseAuth
 import Firebase
 import GoogleSignIn
 import GoogleSignInSwift
+import FirebaseFirestore
 
 
 struct SignUpView: View {
@@ -49,6 +50,21 @@ struct SignUpView: View {
             print("User \(firebaseUser.uid) signed in with email \(firebaseUser.email ?? "unkown")")
             userID = result.user.uid
             userEmail = result.user.email!
+            let db = Firestore.firestore()
+            db.collection("User\(userID)").document("User Info").setData(["Email":userEmail]) { error in
+                
+                // If there are no errors
+                if error == nil {
+                    print("User info added")
+                }
+            }
+            db.collection("User\(userID)").document("Temp Class").setData(["1":"John"]) { error in
+                
+                if error == nil {
+                    print("Class added")
+                }
+            }
+            
             return true
         }
         catch {
@@ -60,7 +76,7 @@ struct SignUpView: View {
     
     private func isValidPassword(_ password: String) -> Bool {
         let passwordRegex = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[$@$#!%*?&])(?=.*[A-Z]).{6,}$")
-        
+
         return passwordRegex.evaluate(with: password)
     }
     
@@ -117,7 +133,6 @@ struct SignUpView: View {
                     if(password.count != 0) {
                         Image(systemName: isValidPassword(password) ? "checkmark" : "xmark")
                             .foregroundColor(isValidPassword(password) ? .green : .red)
-                        
                     }
                         
                     
@@ -144,7 +159,6 @@ struct SignUpView: View {
                 Spacer()
                 
                 Button {
-                    
                     Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
                         
                         if let error = error {
@@ -157,8 +171,21 @@ struct SignUpView: View {
                             userID = authResult.user.uid
                             userEmail = authResult.user.email!
                         }
+                        let db = Firestore.firestore()
+                        db.collection("User\(userID)").document("User Info").setData(["Email":userEmail, "User ID":userID]) { error in
+                            
+                            // If there are no errors
+                            if error == nil {
+                                print("User info added")
+                            }
+                        }
+                        db.collection("User\(userID)").document("Class%Temp Class").setData(["1":"John", "Teacher Name":"You!"]) { error in
+                            
+                            if error == nil {
+                                print("Class added")
+                            }
+                        }
                     }
-                    
                 } label: {
                     Text("Sign Up")
                         .foregroundColor(.black)
@@ -169,32 +196,24 @@ struct SignUpView: View {
                         .background(RoundedRectangle(cornerRadius: 10).fill(Color.white))
                         .padding(.horizontal)
                 }
-                
-                
                 Button {
                     Task {
                         _ = try await signInWithGoogle()
                     }
                 } label: {
                     Text("Create Account With Google")
-                        .frame(maxWidth: .infinity)
+                        .frame(maxWidth: 380)
                         .padding(.vertical, 8)
-                        .background(alignment: .leading) {
+                        .foregroundColor(.blue)
+                        .background(alignment: .leading)
+                    {
                             Image("Google")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 30, alignment: .center)
-                }
-                
-                        
                         }
-                }
-                
-                .buttonStyle(.bordered)
-                
-
-                
-                
+                    }
+                } 
             }
         }
     }
